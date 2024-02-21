@@ -13,13 +13,17 @@
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "@nivo/core": "^0.84.0",
-    "@nivo/pie": "^0.84.0",
     "axios": "^1.6.7",
+    "dotenv-load": "^3.0.0",
     "framer-motion": "^11.0.5",
+    "highcharts": "^11.3.0",
+    "highcharts-react-official": "^3.2.1",
     "next": "14.1.0",
+    "next-env": "^1.1.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-google-charts": "^4.0.1",
+    "recharts": "^2.12.1"
   },
   "devDependencies": {
     "@types/node": "^20",

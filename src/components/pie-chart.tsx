@@ -1,115 +1,87 @@
-import { Box } from '@chakra-ui/react';
-import { ResponsivePieCanvas } from '@nivo/pie';
+// import React from 'react'
+// import Highcharts from 'highcharts'
+// import HighchartsReact from 'highcharts-react-official'
 
-export default function PieChart(data: any) {
+// const options = {
+//   title: {
+//     text: 'My chart'
+//   },
+//   series: [{
+//     data: [1, 2, 3]
+//   }]
+// }
+
+
+// export default function CustomPieChart(data?: any) {
+//   return (
+//     <HighchartsReact
+//       highcharts={Highcharts}
+//       options={options}
+//     />
+//   );
+// }
+
+import React from "react";
+import { Chart } from "react-google-charts";
+
+export const data = [
+  ["Task", "Hours per Day"],
+  ["Work", 11],
+  ["Eat", 2],
+  ["Commute", 2],
+  ["Watch TV", 2],
+  ["Sleep", 7],
+];
+
+export const options = {
+  title: "My Daily Activities",
+  is3D: true,
+};
+
+export default function CustomPieChart() {
   return (
-    <Box w="100vw" h="100vh">
-      <ResponsivePieCanvas
-        data={data}
-        margin={{ top: 40, right: 200, bottom: 40, left: 80 }}
-        innerRadius={0.5}
-        padAngle={0.7}
-        cornerRadius={3}
-        activeOuterRadiusOffset={8}
-        colors={{ scheme: 'paired' }}
-        borderColor={{
-          from: 'color',
-          modifiers: [['darker', 0.6]],
-        }}
-        arcLinkLabelsSkipAngle={10}
-        arcLinkLabelsTextColor="#333333"
-        arcLinkLabelsThickness={2}
-        arcLinkLabelsColor={{ from: 'color' }}
-        arcLabelsSkipAngle={10}
-        arcLabelsTextColor="#333333"
-        // defs={[
-        //   {
-        //     id: 'dots',
-        //     type: 'patternDots',
-        //     background: 'inherit',
-        //     color: 'rgba(255, 255, 255, 0.3)',
-        //     size: 4,
-        //     padding: 1,
-        //     stagger: true,
-        //   },
-        //   {
-        //     id: 'lines',
-        //     type: 'patternLines',
-        //     background: 'inherit',
-        //     color: 'rgba(255, 255, 255, 0.3)',
-        //     rotation: -45,
-        //     lineWidth: 6,
-        //     spacing: 10,
-        //   },
-        // ]}
-        // fill={[
-        //   {
-        //     match: {
-        //       id: 'ruby',
-        //     },
-        //     id: 'dots',
-        //   },
-        //   {
-        //     match: {
-        //       id: 'c',
-        //     },
-        //     id: 'dots',
-        //   },
-        //   {
-        //     match: {
-        //       id: 'go',
-        //     },
-        //     id: 'dots',
-        //   },
-        //   {
-        //     match: {
-        //       id: 'python',
-        //     },
-        //     id: 'dots',
-        //   },
-        //   {
-        //     match: {
-        //       id: 'scala',
-        //     },
-        //     id: 'lines',
-        //   },
-        //   {
-        //     match: {
-        //       id: 'lisp',
-        //     },
-        //     id: 'lines',
-        //   },
-        //   {
-        //     match: {
-        //       id: 'elixir',
-        //     },
-        //     id: 'lines',
-        //   },
-        //   {
-        //     match: {
-        //       id: 'javascript',
-        //     },
-        //     id: 'lines',
-        //   },
-        // ]}
-        legends={[
-          {
-            anchor: 'right',
-            direction: 'column',
-            justify: false,
-            translateX: 140,
-            translateY: 0,
-            itemsSpacing: 2,
-            itemWidth: 60,
-            itemHeight: 14,
-            itemTextColor: '#999',
-            itemDirection: 'left-to-right',
-            itemOpacity: 1,
-            symbolSize: 14,
-            symbolShape: 'circle',
-          },
-        ]}
-      />
-    </Box>
+    <Chart
+      chartType="PieChart"
+      data={data}
+      options={options}
+      width={"100%"}
+      height={"400px"}
+    />
   );
 }
+
+// import React, { PureComponent } from 'react';
+// import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+
+// const data01 = [
+//   { name: 'Group A', value: 400 },
+//   { name: 'Group B', value: 300 },
+//   { name: 'Group C', value: 300 },
+//   { name: 'Group D', value: 200 },
+// ];
+// const data02 = [
+//   { name: 'A1', value: 100 },
+//   { name: 'A2', value: 300 },
+//   { name: 'B1', value: 100 },
+//   { name: 'B2', value: 80 },
+//   { name: 'B3', value: 40 },
+//   { name: 'B4', value: 30 },
+//   { name: 'B5', value: 50 },
+//   { name: 'C1', value: 100 },
+//   { name: 'C2', value: 200 },
+//   { name: 'D1', value: 150 },
+//   { name: 'D2', value: 50 },
+// ];
+
+// export default function CustomPieChart() {
+
+//     return (
+//       <ResponsiveContainer width="100%" height="100%">
+//         <PieChart width={1000} height={1000}>
+//           <Pie data={data01} dataKey="value" cx="50%" cy="50%" outerRadius={60} fill="#8884d8" />
+//           <Pie data={data02} dataKey="value" cx="50%" cy="50%" innerRadius={70} outerRadius={90} fill="#82ca9d" label />
+//         </PieChart>
+//       </ResponsiveContainer>
+//     );
+// }
+
