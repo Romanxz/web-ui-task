@@ -3,7 +3,7 @@ import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import CustomPieChart from '@/components/pie-chart';
 import CustomColumnChart from '@/components/column-chart';
-import { CustomTableChart } from '@/components/table-chart';
+import CustomDataTable from '@/components/data-table';
 
 export interface ICompanyMarketCap {
   id: string,
@@ -60,7 +60,7 @@ export default function WebTask() {
             ) : null}
           </Stack>
         </GridItem>
-        <GridItem as={Flex} justify="center" align="center" boxShadow="5px 5px 8px 0px rgba(14, 63, 84, 0.3)" borderRadius={8} colSpan={2} bg='#1b607d'><CustomTableChart /></GridItem>
+        <GridItem as={Flex} justify="center" align="start" boxShadow="5px 5px 8px 0px rgba(14, 63, 84, 0.3)" borderRadius={8} colSpan={2} bg='#1b607d'><CustomDataTable rawData={rawData} /></GridItem>
         <GridItem as={Flex} justify="center" align="center" boxShadow="5px 5px 8px 0px rgba(14, 63, 84, 0.3)" borderRadius={8} colSpan={2} bg='#1b607d'><CustomPieChart rawData={rawData} /></GridItem>
         <GridItem as={Flex} justify="center" align="center" boxShadow="5px 5px 8px 0px rgba(14, 63, 84, 0.3)" borderRadius={8} colSpan={4} bg='#1b607d'><CustomColumnChart rawData={rawData} /></GridItem>
       </Grid>
