@@ -1,87 +1,52 @@
-// import React from 'react'
-// import Highcharts from 'highcharts'
-// import HighchartsReact from 'highcharts-react-official'
-
-// const options = {
-//   title: {
-//     text: 'My chart'
-//   },
-//   series: [{
-//     data: [1, 2, 3]
-//   }]
-// }
-
-
-// export default function CustomPieChart(data?: any) {
-//   return (
-//     <HighchartsReact
-//       highcharts={Highcharts}
-//       options={options}
-//     />
-//   );
-// }
-
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { Chart } from "react-google-charts";
+import { ICompanyMarketCap } from "@/pages";
+import { Text } from "@chakra-ui/react";
 
-export const data = [
-  ["Task", "Hours per Day"],
-  ["Work", 11],
-  ["Eat", 2],
-  ["Commute", 2],
-  ["Watch TV", 2],
-  ["Sleep", 7],
-];
+export default function CustomPieChart({ rawData }: { rawData: ICompanyMarketCap[] }) {
 
-export const options = {
-  title: "My Daily Activities",
-  is3D: true,
-};
+  const pieData = useMemo(() => {
+    const pieData = rawData.map((item: ICompanyMarketCap) => {
+      return [item.name, item.capitalization];
+    });
+    pieData.unshift(["Company", "Capitalization"]);
+    console.log("Generated New PieChart Data:", pieData)
+    return pieData as Array<(string | number)[]>;
+  }, [rawData])
 
-export default function CustomPieChart() {
-  return (
-    <Chart
-      chartType="PieChart"
-      data={data}
-      options={options}
-      width={"100%"}
-      height={"400px"}
-    />
+  return (<>
+    {pieData?.length > 1 ? (
+      <Chart
+        chartType="PieChart"
+        data={pieData}
+        options={{
+          is3D: true,
+          pieSliceText: 'label',
+          tooltip: {
+            showColorCode: true
+          },
+          legend: {
+            position: "bottom",
+            alignment: "center",
+            textStyle: {
+              color: "white",
+              fontSize: 14
+            }
+          },
+          chartArea: {
+            left: 0,
+            top: 0,
+            width: "100%",
+            height: "90%"
+          },
+          backgroundColor: "#1b607d",
+        }}
+        width={"95%"}
+        height={"95%"}
+      />
+    ) : (
+      <Text align="center" color="red">No Data Avaliable</Text>
+    )}
+  </>
   );
 }
-
-// import React, { PureComponent } from 'react';
-// import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
-
-// const data01 = [
-//   { name: 'Group A', value: 400 },
-//   { name: 'Group B', value: 300 },
-//   { name: 'Group C', value: 300 },
-//   { name: 'Group D', value: 200 },
-// ];
-// const data02 = [
-//   { name: 'A1', value: 100 },
-//   { name: 'A2', value: 300 },
-//   { name: 'B1', value: 100 },
-//   { name: 'B2', value: 80 },
-//   { name: 'B3', value: 40 },
-//   { name: 'B4', value: 30 },
-//   { name: 'B5', value: 50 },
-//   { name: 'C1', value: 100 },
-//   { name: 'C2', value: 200 },
-//   { name: 'D1', value: 150 },
-//   { name: 'D2', value: 50 },
-// ];
-
-// export default function CustomPieChart() {
-
-//     return (
-//       <ResponsiveContainer width="100%" height="100%">
-//         <PieChart width={1000} height={1000}>
-//           <Pie data={data01} dataKey="value" cx="50%" cy="50%" outerRadius={60} fill="#8884d8" />
-//           <Pie data={data02} dataKey="value" cx="50%" cy="50%" innerRadius={70} outerRadius={90} fill="#82ca9d" label />
-//         </PieChart>
-//       </ResponsiveContainer>
-//     );
-// }
-
