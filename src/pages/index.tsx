@@ -9,7 +9,7 @@ export interface ICompanyMarketCap {
   id: string,
   name: string,
   capitalization: number
-}
+};
 
 export default function WebTask() {
   const [isLoading, setLoading] = useState(false);
