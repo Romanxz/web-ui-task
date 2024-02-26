@@ -1,4 +1,4 @@
-import { Table, Thead, Tbody, Tr, Th, Td, chakra } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Td, chakra, Text, CircularProgress, Flex } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import {
   useReactTable,
@@ -57,7 +57,7 @@ export function DataTable<Data extends object>({
     <Table>
       <Thead>
         {table.getHeaderGroups().map((headerGroup) => (
-          <Tr key={headerGroup.id}>
+          <Tr key={headerGroup.id} color="white">
             {headerGroup.headers.map((header) => {
               // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
               const meta: any = header.column.columnDef.meta;
@@ -66,13 +66,14 @@ export function DataTable<Data extends object>({
                   key={header.id}
                   onClick={header.column.getToggleSortingHandler()}
                   isNumeric={meta?.isNumeric}
+                  color="white"
                 >
                   {flexRender(
                     header.column.columnDef.header,
                     header.getContext()
                   )}
 
-                  <chakra.span pl="4">
+                  <chakra.span color="white" pl="4">
                     {header.column.getIsSorted() ? (
                       header.column.getIsSorted() === "desc" ? (
                         <TriangleDownIcon aria-label="sorted descending" />
@@ -89,7 +90,7 @@ export function DataTable<Data extends object>({
       </Thead>
       <Tbody>
         {table.getRowModel().rows.map((row) => (
-          <Tr key={row.id}>
+          <Tr color="white" key={row.id}>
             {row.getVisibleCells().map((cell) => {
               // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
               const meta: any = cell.column.columnDef.meta;
@@ -106,6 +107,13 @@ export function DataTable<Data extends object>({
   );
 }
 
-export default function CustomDataTable({ rawData }: { rawData: ICompanyMarketCap[] }) {
-  return <DataTable data={rawData} columns={columns} />;
+export default function CustomDataTable({ rawData, isLoading }: { rawData: ICompanyMarketCap[]; isLoading: boolean }) {
+  return (<>
+    {rawData?.length > 0 ? (
+      <DataTable data={rawData} columns={columns} />
+    ) : isLoading ? <Flex w="100&" h="100%" justify="center" align="center" ><CircularProgress isIndeterminate color='green.300' /></Flex> : (
+      <Flex w="100&" h="100%" justify="center" align="center" ><Text align="center" color="red">No Data Avaliable</Text></Flex>
+    )}
+  </>
+  );
 }

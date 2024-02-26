@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from "react";
 import { Chart } from "react-google-charts";
 import { ICompanyMarketCap } from "@/pages";
-import { Text } from "@chakra-ui/react";
+import { CircularProgress, Text } from "@chakra-ui/react";
 
-export default function CustomPieChart({ rawData }: { rawData: ICompanyMarketCap[] }) {
+export default function CustomPieChart({ rawData, isLoading }: { rawData: ICompanyMarketCap[]; isLoading: boolean }) {
 
   const pieData = useMemo(() => {
     const pieData = rawData.map((item: ICompanyMarketCap) => {
@@ -41,10 +41,10 @@ export default function CustomPieChart({ rawData }: { rawData: ICompanyMarketCap
           },
           backgroundColor: "#1b607d",
         }}
-        width={"95%"}
-        height={"95%"}
+        width={"98%"}
+        height={"98%"}
       />
-    ) : (
+    ) : isLoading ? <CircularProgress isIndeterminate color='green.300' /> : (
       <Text align="center" color="red">No Data Avaliable</Text>
     )}
   </>

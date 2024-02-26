@@ -1,22 +1,9 @@
 import { ICompanyMarketCap } from "@/pages";
-import { Text } from "@chakra-ui/react";
+import { CircularProgress, Text } from "@chakra-ui/react";
 import React, { useMemo } from "react";
 import { Chart } from "react-google-charts";
 
-export const data = [
-  ["Element", "Density", { role: "style" }],
-  ["Copper", 8.94, "#b87333"], // RGB value
-  ["Silver", 10.49, "silver"], // English color name
-  ["Gold", 19.3, "gold"],
-  ["Platinum", 14, "red"], // CSS-style declaration
-  ["Platinum", 5, "green"], // CSS-style declaration
-  ["Platinum", 16, "blue"], // CSS-style declaration
-  ["Platinum", 11, "orange"], // CSS-style declaration
-  ["Platinum", 3, "teal"], // CSS-style declaration
-  ["Platinum", 1, "violet"], // CSS-style declaration
-];
-
-export default function CustomColumnChart({ rawData }: { rawData: ICompanyMarketCap[] }) {
+export default function CustomColumnChart({ rawData, isLoading }: { rawData: ICompanyMarketCap[]; isLoading: boolean }) {
 
   const columnData = useMemo(() => {
     const columnData = rawData.map((item: ICompanyMarketCap) => {
@@ -52,10 +39,10 @@ export default function CustomColumnChart({ rawData }: { rawData: ICompanyMarket
           },
           backgroundColor: "#1b607d",
         }}
-        width={"95%"}
-        height={"95%"}
+        width={"98%"}
+        height={"98%"}
       />
-    ) : (
+    ) : isLoading ? <CircularProgress isIndeterminate color='green.300' /> : (
       <Text align="center" color="red">No Data Avaliable</Text>
     )}
   </>
