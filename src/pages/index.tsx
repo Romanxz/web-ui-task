@@ -11,6 +11,7 @@ export interface ICompanyMarketCap {
   capitalization: number
 }
 
+
 export default function WebTask() {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState('');
